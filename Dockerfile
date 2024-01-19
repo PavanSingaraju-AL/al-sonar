@@ -11,7 +11,7 @@ RUN mkdir -p /opt/sonarqube/extensions/plugins/
 
 # Download the sonar-cnes-report-4.2.0.jar file using wget
 RUN wget -O /opt/sonarqube/extensions/plugins/sonar-cnes-report-4.2.0.jar \
-    https://github.com/cnescatlab/sonar-cnes-report/releases/download/4.2.0/sonar-cnes-report-4.2.0.jar
+    https://github.com/PavanSingaraju-AL/al-sonar/blob/main/src/main/resources/sonar-cnes-report-4.2.0.jar
 # Optional: Copy additional configuration files
 # COPY sonar.properties /opt/sonarqube/conf/
 
