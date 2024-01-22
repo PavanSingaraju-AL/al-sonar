@@ -11,15 +11,15 @@ RUN mkdir -p /opt/sonarqube/extensions/plugins/
 
 # Download the sonar-cnes-report-4.2.0.jar file using wget
 RUN wget -O /opt/sonarqube/extensions/plugins/sonar-cnes-report-4.2.0.jar \
-    https://github.com/PavanSingaraju-AL/al-sonar/blob/main/src/main/resources/sonar-cnes-report-4.2.0.jar
+    https://github.com/cnescatlab/sonar-cnes-report/releases/download/4.2.0/sonar-cnes-report-4.2.0.jar
 # Optional: Copy additional configuration files
 # COPY sonar.properties /opt/sonarqube/conf/
 
 # Optional: Set environment variables
-ENV SONAR_WEB_PORT=9090
+ENV SONAR_WEB_PORT=9000
 
 # Expose ports (if needed)
-EXPOSE 9090
+EXPOSE 9000
 
 # Optional: Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s CMD curl -f http://localhost:9000 || exit 1
