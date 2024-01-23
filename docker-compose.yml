@@ -1,7 +1,7 @@
 version: "3"
 services:
   sonarqube:
-    image: ghcr.io/pavansingaraju-al/al-sonarqube:1.1
+    image: ghcr.io/pavansingaraju-al/al-sonarqube:1.2
     hostname: sonarqube
     container_name: sonarqube
     depends_on:
@@ -12,9 +12,7 @@ services:
       SONAR_JDBC_PASSWORD: sonar
     volumes:
       - ~/docker/sonarqube/sq/data:/opt/sonarqube/data
-      - ~/docker/sonarqube/sq/extensions:/opt/sonarqube/extensions
       - ~/docker/sonarqube/sq/logs:/opt/sonarqube/logs
-      - ~/docker/sonarqube/sq/extensions/plugins:/opt/sonarqube/extensions/plugins
     ports:
       - "9090:9000"
   db:
