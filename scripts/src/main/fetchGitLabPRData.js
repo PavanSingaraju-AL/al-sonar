@@ -48,17 +48,20 @@ async function fetchMergeRequestsAndComments() {
                         pr_title: mr.title,
                         pr_author: mr.author.name,
                         pr_created_at: mr.created_at,
-                        pr_status: mr.state
+                        pr_status: mr.state,
+                        pr_closed_on: mr.merged_at
                     };
                     const commentsData = commits.map(commit => ({
                         pr_title: mr.title,
                         pr_author: mr.author.name,
                         pr_created_at: mr.created_at,
                         pr_status: mr.state,
+                        pr_closed_on: mr.merged_at,
                         commit_author: commit.author.username,
                         commit_comment: commit.body,
                         commit_created_at: commit.created_at,
-                        commit_is_resolved: commit.resolved
+                        commit_is_resolved: commit.resolved,
+                        commit_resolved_on: commit.resolved_at
                     }));
                     // Combine PR and commit data
                     prsAndCommits.push(commentsData);
@@ -77,6 +80,7 @@ async function fetchMergeRequestsAndComments() {
             { id: 'pr_title', title: 'PR Title' },
             { id: 'pr_author', title: 'PR Author' },
             { id: 'pr_created_at', title: 'PR Created At' },
+            { id: 'pr_closed_on', title: 'PR Closed On' },
             { id: 'pr_status', title: 'PR Status' },
             { id: 'commit_author', title: 'Comment Author' },
             { id: 'commit_comment', title: 'Comment' },
