@@ -24,7 +24,7 @@ services:
       POSTGRES_PASSWORD: sonar
       POSTGRES_DB: sonar
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - ~/docker/sonarqube/pgsql/:/var/lib/postgresql
       - ~/docker/sonarqube/pgsql/data:/var/lib/postgresql/data
