@@ -5,7 +5,7 @@ const csvFilePath = 'output.csv';
 const { createObjectCsvWriter } = require('csv-writer');
 
 // Load configuration from JSON
-const config = require('../resources/config.json'); // Assuming your JSON config is in config.json file
+const config = require('./config.json'); // Assuming your JSON config is in config.json file
 
 // Function to fetch merge requests created by a specific author after a certain date
 async function getMergeRequests(author, fromDate, projectConfig) {
