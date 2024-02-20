@@ -93,7 +93,7 @@ async function fetchPullRequestsAndComments() {
             { id: 'pr_closed_on', title: 'PR Closed On' },
             { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
             { id: 'pr_returned', title: 'Is PR Returned?' },
-            { id: 'comment_body', title: 'Comment Body' },
+            { id: 'comment_body', title: 'Comment Body' }
         ]
     });
 

@@ -7,6 +7,42 @@ const { createObjectCsvWriter } = require('csv-writer');
 // Load configuration from JSON
 const config = require('./config.json'); // Assuming your JSON config is in config.json file
 
+// Google Drive API credentials
+/*const credentials = require('./credentials.json'); // Update with your credentials file
+
+// Authenticate with Google Drive API
+const auth = new google.auth.GoogleAuth({
+    credentials: credentials,
+    scopes: ['https://www.googleapis.com/auth/drive']
+});
+
+// Create Google Drive API client
+const drive = google.drive({ version: 'v3', auth });
+
+// Upload CSV file to Google Drive
+function uploadFileToDrive(fileName) {
+    const fileMetadata = {
+        name: fileName,
+        mimeType: 'text/csv'
+    };
+    const media = {
+        mimeType: 'text/csv',
+        body: fs.createReadStream(fileName)
+    };
+    drive.files.create({
+        resource: fileMetadata,
+        media: media,
+        fields: 'id'
+    }, (err, file) => {
+        if (err) {
+            console.error('Error uploading file to Google Drive:', err);
+            return;
+        }
+        console.log('File uploaded to Google Drive with ID:', file.data.id);
+    });
+}
+*/
+
 // Function to fetch merge requests created by a specific author after a certain date
 async function getMergeRequests(author, fromDate, projectConfig) {
     const url = `${config.gitlab.baseURL}${projectConfig.project_id}${config.gitlab.pr_apiURLs}`
@@ -54,14 +90,13 @@ async function fetchMergeRequestsAndComments() {
                     const commentsData = commits.map(commit => ({
                         pr_title: mr.title,
                         pr_author: mr.author.name,
-                        pr_created_at: mr.created_at,
+                        pr_priority: '',
+                        pr_size: '',
                         pr_status: mr.state,
                         pr_closed_on: mr.merged_at,
-                        commit_author: commit.author.username,
-                        commit_comment: commit.body,
-                        commit_created_at: commit.created_at,
-                        commit_is_resolved: commit.resolved,
-                        commit_resolved_on: commit.resolved_at
+                        pr_no_of_days: '',
+                        pr_returned: '',
+                        commit_comment: commit.body
                     }));
                     // Combine PR and commit data
                     prsAndCommits.push(commentsData);
@@ -79,14 +114,13 @@ async function fetchMergeRequestsAndComments() {
         header: [
             { id: 'pr_title', title: 'PR Title' },
             { id: 'pr_author', title: 'PR Author' },
-            { id: 'pr_created_at', title: 'PR Created At' },
-            { id: 'pr_closed_on', title: 'PR Closed On' },
+            { id: 'pr_priority', title: 'PR Priority'},
+            { id: 'pr_size', title: 'Story Points'},
             { id: 'pr_status', title: 'PR Status' },
-            { id: 'commit_author', title: 'Comment Author' },
-            { id: 'commit_comment', title: 'Comment' },
-            { id: 'commit_created_at', title: 'Comment Created At' },
-            { id: 'commit_is_resolved', title: 'Is Comment Resolved?' }
-            
+            { id: 'pr_closed_on', title: 'PR Closed On' },
+            { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
+            { id: 'pr_returned', title: 'Is PR Returned?' },
+            { id: 'commit_comment', title: 'Comment' }
         ]
     });
 
