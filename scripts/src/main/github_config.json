@@ -1,0 +1,14 @@
+{
+    "github": {
+      "projects": [
+        {
+          "owner": "EvoSuite",
+          "repo": "evosuite",
+          "token": "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",
+          "created_after": "2023-01-01T00:00:00Z",
+          "author_usernames": ["tanjh"]
+        }
+      ]
+    }
+  }
+  
