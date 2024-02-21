@@ -6,13 +6,28 @@
         "projects": [
             {
                 "project_id": "54710891",
-                "token": "glpat-ZGByfV9k_dexPonfJcMW", 
+                "token": "<Confidential>", 
                 "author_usernames": [
                     "pavan.singaraju"
                 ],
                 "created_after": "2024-02-08"
             }
         ]
-    }
+    },
+    "github": {
+        "baseURL": "https://api.github.com/",
+        "pr_apiURLs": "repos/$owner/$repo/pulls",
+        "projects": [
+          {
+            "owner": "EvoSuite",
+            "repo": "evosuite",
+            "token": "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",
+            "created_after": "2023-01-01T00:00:00Z",
+            "author_usernames": [
+                "tanjh"
+            ]
+          }
+        ]
+      }
     
 }
