@@ -7,41 +7,17 @@ const { createObjectCsvWriter } = require('csv-writer');
 // Load configuration from JSON
 const config = require('./config.json'); // Assuming your JSON config is in config.json file
 
-// Google Drive API credentials
-/*const credentials = require('./credentials.json'); // Update with your credentials file
-
-// Authenticate with Google Drive API
-const auth = new google.auth.GoogleAuth({
-    credentials: credentials,
-    scopes: ['https://www.googleapis.com/auth/drive']
-});
-
-// Create Google Drive API client
-const drive = google.drive({ version: 'v3', auth });
-
-// Upload CSV file to Google Drive
-function uploadFileToDrive(fileName) {
-    const fileMetadata = {
-        name: fileName,
-        mimeType: 'text/csv'
-    };
-    const media = {
-        mimeType: 'text/csv',
-        body: fs.createReadStream(fileName)
-    };
-    drive.files.create({
-        resource: fileMetadata,
-        media: media,
-        fields: 'id'
-    }, (err, file) => {
-        if (err) {
-            console.error('Error uploading file to Google Drive:', err);
-            return;
-        }
-        console.log('File uploaded to Google Drive with ID:', file.data.id);
-    });
+function calculateDaysSinceClosed(closedAt, createdAt) {
+    if (!closedAt) {
+      return ''; // Indicate "not applicable" for open PRs
+    }
+  
+    const closedDate = new Date(closedAt);
+    const createdDate = new Date(createdAt);
+    const timeDiff = closedDate.getTime() - createdDate.getTime();
+    const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return days;
 }
-*/
 
 // Function to fetch merge requests created by a specific author after a certain date
 async function getMergeRequests(author, fromDate, projectConfig) {
@@ -94,9 +70,10 @@ async function fetchMergeRequestsAndComments() {
                         pr_size: '',
                         pr_status: mr.state,
                         pr_closed_on: mr.merged_at,
-                        pr_no_of_days: '',
+                        pr_no_of_days: calculateDaysSinceClosed(mr.merged_at, mr.created_at),
                         pr_returned: '',
                         commit_comment: commit.body
+                        
                     }));
                     // Combine PR and commit data
                     prsAndCommits.push(commentsData);
@@ -110,7 +87,7 @@ async function fetchMergeRequestsAndComments() {
     
     // Write data to CSV
     const csvWriter = createObjectCsvWriter({
-        path: 'output.csv',
+        path: 'gitlab_PR_Comments.csv',
         header: [
             { id: 'pr_title', title: 'PR Title' },
             { id: 'pr_author', title: 'PR Author' },
@@ -121,6 +98,7 @@ async function fetchMergeRequestsAndComments() {
             { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
             { id: 'pr_returned', title: 'Is PR Returned?' },
             { id: 'commit_comment', title: 'Comment' }
+            
         ]
     });
 
