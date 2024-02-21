@@ -95,7 +95,7 @@ async function fetchPullRequestsAndComments() {
 
     // Write data to CSV
     const csvWriter = createObjectCsvWriter({
-        path: 'github_output.csv',
+        path: 'github_PR_Comments.csv',
         header: [
             { id: 'pr_title', title: 'PR Title' },
             { id: 'pr_author', title: 'PR Author' },

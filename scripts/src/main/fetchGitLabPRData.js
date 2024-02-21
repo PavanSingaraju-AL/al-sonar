@@ -87,7 +87,7 @@ async function fetchMergeRequestsAndComments() {
     
     // Write data to CSV
     const csvWriter = createObjectCsvWriter({
-        path: 'output.csv',
+        path: 'gitlab_PR_Comments.csv',
         header: [
             { id: 'pr_title', title: 'PR Title' },
             { id: 'pr_author', title: 'PR Author' },
