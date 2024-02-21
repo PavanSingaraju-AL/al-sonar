@@ -27,6 +27,18 @@ async function getPullRequests(author, fromDate, projectConfig) {
     }
 }
 
+function calculateDaysSinceClosed(closedAt, createdAt) {
+    if (!closedAt) {
+      return ''; // Indicate "not applicable" for open PRs
+    }
+  
+    const closedDate = new Date(closedAt);
+    const createdDate = new Date(createdAt);
+    const timeDiff = closedDate.getTime() - createdDate.getTime();
+    const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return days;
+}
+
 // Function to fetch comments for a pull request
 async function getPullRequestComments(pullRequest, projectConfig) {
     const url = pullRequest.comments_url;
@@ -67,7 +79,7 @@ async function fetchPullRequestsAndComments() {
                         pr_size: '',
                         pr_status: pr.state,
                         pr_closed_on: pr.closed_at,
-                        pr_no_of_days: '',
+                        pr_no_of_days: calculateDaysSinceClosed(pr.closedAt, pr.createdAt),
                         pr_returned: '',
                         comment_body: comment.body
                     }));
@@ -93,7 +105,7 @@ async function fetchPullRequestsAndComments() {
             { id: 'pr_closed_on', title: 'PR Closed On' },
             { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
             { id: 'pr_returned', title: 'Is PR Returned?' },
-            { id: 'comment_body', title: 'Comment Body' },
+            { id: 'comment_body', title: 'Comment Body' }
         ]
     });
 

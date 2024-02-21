@@ -1,5 +1,5 @@
-PR Title,PR Author,PR Created At,PR Closed On,PR Status,Comment Author,Comment Body,Comment Created At
-FIX BUG: the process will stall if the output buffer fill up.,tanjh,2023-09-01T10:00:16Z,,open,tanjh,"[INFO] * EvoSuite 1.2.0
+PR Title,PR Author,PR Priority,Story Points,PR Status,PR Closed On,No. Of Days to Close the PR,Is PR Returned?,Comment Body
+FIX BUG: the process will stall if the output buffer fill up.,tanjh,,,open,,,,"[INFO] * EvoSuite 1.2.0
 [INFO] Registered remote process from /127.0.0.1:19812
 [INFO] Going to execute 4 jobs
 [INFO] Estimated completion time: 1 minutes, by 2023-09-01T09:40:26.056
@@ -26,8 +26,8 @@ FIX BUG: the process will stall if the output buffer fill up.,tanjh,2023-09-01T1
 [INFO] tutorial.LinkedList
 [INFO] WARN: failed to generate tests for 4 classes out of 4
 [INFO] Stopping spawn process manager
-",2023-09-01T10:00:58Z
-FIX BUG: the process will stall if the output buffer fill up.,tanjh,2023-09-01T10:00:16Z,,open,tanjh,"after this commit, the output as following:
+"
+FIX BUG: the process will stall if the output buffer fill up.,tanjh,,,open,,,,"after this commit, the output as following:
 [INFO] * EvoSuite 1.2.0
 [INFO] Registered remote process from /127.0.0.1:20209
 [INFO] Going to execute 4 jobs
@@ -61,9 +61,9 @@ FIX BUG: the process will stall if the output buffer fill up.,tanjh,2023-09-01T1
 [INFO] Removed test suites: 0
 [INFO] New test suites: 4
 [INFO] Stopping spawn process manager
-",2023-09-01T10:01:45Z
-Support java 17,egorklimov,2023-06-01T11:05:12Z,,open,egorklimov,I also tried this solution with java19 and it hangs without any log. I'll try to debug it,2023-06-01T11:05:56Z
-Support java 17,egorklimov,2023-06-01T11:05:12Z,,open,egorklimov,"I tried it on this simple app:
+"
+Support java 17,egorklimov,,,open,,,,I also tried this solution with java19 and it hangs without any log. I'll try to debug it
+Support java 17,egorklimov,,,open,,,,"I tried it on this simple app:
 
 ```java
 package org.example;
@@ -141,11 +141,11 @@ public class Main_ESTest extends Main_ESTest_scaffolding {
       assertEquals(""Name: , age: 0 and profession: "", string0);
   }
 }
-```",2023-06-01T11:15:47Z
-Support java 17,egorklimov,2023-06-01T11:05:12Z,,open,egorklimov,"Could you restart tests? I tried them locally and it is green, maybe it is a flaky test",2023-06-05T13:44:37Z
-Support java 17,egorklimov,2023-06-01T11:05:12Z,,open,v1d3rm3,Solution with `add-opens` is not working in ubuntu openjdk 17 ,2023-08-28T22:35:22Z
-Support java 17,egorklimov,2023-06-01T11:05:12Z,,open,v1d3rm3,Solution with `add-opens` is not working in ubuntu openjdk 17 ,2023-08-28T22:35:44Z
-JavaExecCmdUtil: use `Paths.get` to join file paths,kennyballou,2023-05-29T17:12:04Z,,open,jose,"Hi @kennyballou,
+```"
+Support java 17,egorklimov,,,open,,,,"Could you restart tests? I tried them locally and it is green, maybe it is a flaky test"
+Support java 17,egorklimov,,,open,,,,Solution with `add-opens` is not working in ubuntu openjdk 17 
+Support java 17,egorklimov,,,open,,,,Solution with `add-opens` is not working in ubuntu openjdk 17 
+JavaExecCmdUtil: use `Paths.get` to join file paths,kennyballou,,,open,,,,"Hi @kennyballou,
 
 Thank you for taking the time to contribute to the EvoSuite project.  If understood correctly, you're proposing
 
@@ -160,11 +160,11 @@ final String separator = System.getProperty(""file.separator"");
 final String JAVA_CMD = System.getProperty(""java.home"") + separator + ""bin"" + separator + ""java"";
 ```
 
-right?",2023-05-30T09:13:45Z
-JavaExecCmdUtil: use `Paths.get` to join file paths,kennyballou,2023-05-29T17:12:04Z,,open,kennyballou,That's correct.  I didn't remove the `separator` variable because it was used in other locations.  The change is limited to a single test. It's possible this pattern can/should be used in other parts of the codebase.,2023-05-30T15:36:35Z
-JavaExecCmdUtil: use `Paths.get` to join file paths,kennyballou,2023-05-29T17:12:04Z,,open,kennyballou,"@jose: I think to further explain this change, sometimes the values returned by ""java.home"" or other environment variables have a trailing path separator, e.g., ""/"", included; as is the case for me while using Guix.  Therefore, the manual separator interpolating version causes the test suite to fail while looking for the Java executable.  The `Paths.get` version automatically handles trailing slashes and intersperses the appropriate OS separator between path elements. ",2023-11-06T16:39:18Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,jose,We might need to discuss the pros/cons of pull requests #451 and #441 before going ahead.  @GeraldineGalindo any chance you could summarise the pros/cons of this pull request vs. #441?,2023-05-09T11:02:51Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,GeraldineGalindo,"> We might need to discuss the pros/cons of pull requests #451 and #441 before going ahead. @GeraldineGalindo any chance you could summarise the pros/cons of this pull request vs. #441?
+right?"
+JavaExecCmdUtil: use `Paths.get` to join file paths,kennyballou,,,open,,,,That's correct.  I didn't remove the `separator` variable because it was used in other locations.  The change is limited to a single test. It's possible this pattern can/should be used in other parts of the codebase.
+JavaExecCmdUtil: use `Paths.get` to join file paths,kennyballou,,,open,,,,"@jose: I think to further explain this change, sometimes the values returned by ""java.home"" or other environment variables have a trailing path separator, e.g., ""/"", included; as is the case for me while using Guix.  Therefore, the manual separator interpolating version causes the test suite to fail while looking for the Java executable.  The `Paths.get` version automatically handles trailing slashes and intersperses the appropriate OS separator between path elements. "
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,We might need to discuss the pros/cons of pull requests #451 and #441 before going ahead.  @GeraldineGalindo any chance you could summarise the pros/cons of this pull request vs. #441?
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,"> We might need to discuss the pros/cons of pull requests #451 and #441 before going ahead. @GeraldineGalindo any chance you could summarise the pros/cons of this pull request vs. #441?
 
 Thanks for the comment! Sure: 
 
@@ -172,13 +172,13 @@ As I reviewed, #441 proposes a good structure for managing the responsibilities 
 
 I think that the main difference between both PRs is the focus of each one, as I understand #441 proposes the base structure for using different naming strategies. In contrast, #451 proposes two heuristics besides the type-based one using information gathered in visiting phase (which is why this PR introduces changes to the `TestCodeVisitor` class), therefore, I do not think that the PRs are comparable, instead, they can be complementary. 
 
-If more strategies could be crafted for variable naming in EvoSuite, a structure defined in #441 is needed to avoid the `TestCodeVisitor` class becoming a large class. However, this is designed to only use the information of the variable types obtained from the `VariableReference` class. #451 uses dictionaries for gathering and crafting variable names based on reflection information retrieval (so, adapting #451 to the structure in #441 would need some changes). If possible, I'd like to make a new PR adapting the heuristics proposed with the strategy pattern structure. What do you think about this option?",2023-05-17T19:17:23Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,GeraldineGalindo,"@jose, thanks again for the comments, we reviewed PR #441 again and did a little test to implement our naming suggestion with the proposed structure successfully. So, we kindly inquire about the status of #441, and if its refactoring would be included in EvoSuite, we'd like to upload a PR with the implementation using this new structure, and if it helps we'd be glad to meet and discuss the PR. Many thanks for considering my request.",2023-06-05T12:29:16Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,jose,Thanks @GeraldineGalindo for your feedback.  I'm going to merge [#441](https://github.com/EvoSuite/evosuite/pull/441).  It would be great if could adapt/update [#451](https://github.com/EvoSuite/evosuite/pull/451) to use the new structure proposed in [#441](https://github.com/EvoSuite/evosuite/pull/441).,2023-07-03T07:40:35Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,GeraldineGalindo,"Thanks @jose for the response! I'm uploading the update of this commit to the new structure, and I'll be looking for comments or reviews on the proposal. ",2023-07-07T17:35:52Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,jose,Thanks @GeraldineGalindo.,2023-07-11T14:40:55Z
-Heuristics for variable naming,GeraldineGalindo,2023-04-24T14:06:27Z,2023-07-11T14:40:30Z,closed,GeraldineGalindo,Thanks @jose for reviewing and for your time :),2023-07-11T14:59:35Z
-support war package in classpath,sweetStreet,2023-04-23T16:41:43Z,,open,jose,"Hi @sweetStreet,
+If more strategies could be crafted for variable naming in EvoSuite, a structure defined in #441 is needed to avoid the `TestCodeVisitor` class becoming a large class. However, this is designed to only use the information of the variable types obtained from the `VariableReference` class. #451 uses dictionaries for gathering and crafting variable names based on reflection information retrieval (so, adapting #451 to the structure in #441 would need some changes). If possible, I'd like to make a new PR adapting the heuristics proposed with the strategy pattern structure. What do you think about this option?"
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,"@jose, thanks again for the comments, we reviewed PR #441 again and did a little test to implement our naming suggestion with the proposed structure successfully. So, we kindly inquire about the status of #441, and if its refactoring would be included in EvoSuite, we'd like to upload a PR with the implementation using this new structure, and if it helps we'd be glad to meet and discuss the PR. Many thanks for considering my request."
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,Thanks @GeraldineGalindo for your feedback.  I'm going to merge [#441](https://github.com/EvoSuite/evosuite/pull/441).  It would be great if could adapt/update [#451](https://github.com/EvoSuite/evosuite/pull/451) to use the new structure proposed in [#441](https://github.com/EvoSuite/evosuite/pull/441).
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,"Thanks @jose for the response! I'm uploading the update of this commit to the new structure, and I'll be looking for comments or reviews on the proposal. "
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,Thanks @GeraldineGalindo.
+Heuristics for variable naming,GeraldineGalindo,,,closed,2023-07-11T14:40:30Z,,,Thanks @jose for reviewing and for your time :)
+support war package in classpath,sweetStreet,,,open,,,,"Hi @sweetStreet,
 
 Thanks for taking the time to contribute to this project.
 
@@ -189,24 +189,24 @@ Quick question, do `java.util.jar.JarFile` and `java.util.jar.JarEntry` support 
 
 --
 Best,
-Jose",2023-05-09T11:18:50Z
-Support target_method functioning for MutationFactory,zzctmac,2022-10-28T09:49:33Z,,open,jose,"Hi @zzctmac,
+Jose"
+Support target_method functioning for MutationFactory,zzctmac,,,open,,,,"Hi @zzctmac,
 
 Thanks for taking the time to contribute to this project.  Before I go ahead and merge it, I'm wondering whether we would need to replicate this pull request to any other factory class.
 
 
 --
 Best,
-Jose",2023-05-09T11:08:47Z
-Support target_method functioning for MutationFactory,zzctmac,2022-10-28T09:49:33Z,,open,zzctmac,"@jose 
+Jose"
+Support target_method functioning for MutationFactory,zzctmac,,,open,,,,"@jose 
 
-Yes, that would be better. But I am sure that only the mutation criterion lacks this function among the default eight criteria.",2023-05-09T11:18:30Z
-Support target_method functioning for MutationFactory,zzctmac,2022-10-28T09:49:33Z,,open,jose,Thanks.  Any chance you could augment the `TargetMethodListSystemTest` class with a few more test cases that would exercise this on each of the default criteria?,2023-05-09T11:22:17Z
-Support target_method functioning for MutationFactory,zzctmac,2022-10-28T09:49:33Z,,open,zzctmac,"Ok, good idea. Give me some time",2023-05-09T11:24:03Z
-Support target_method functioning for MutationFactory,zzctmac,2022-10-28T09:49:33Z,,open,zzctmac,"Hello @jose, I have created tests for checking all default criteria.",2023-05-09T13:02:35Z
-Bump git from 2.4.0 to 4.11.4 in /plugins/jenkins,dependabot[bot],2022-08-10T18:30:30Z,2022-12-15T17:37:59Z,closed,dependabot[bot],Superseded by #444.,2022-12-15T17:37:58Z
-Fixed classloader construction for GenericClassImpl,henryhchchc,2022-06-17T03:07:57Z,2023-05-07T12:42:38Z,closed,henryhchchc,Closed due to impatience.,2023-05-07T12:42:38Z
-Fixed classloader construction for GenericClassImpl,henryhchchc,2022-06-17T03:07:57Z,2023-05-07T12:42:38Z,closed,jose,"Hi @henryhchchc,
+Yes, that would be better. But I am sure that only the mutation criterion lacks this function among the default eight criteria."
+Support target_method functioning for MutationFactory,zzctmac,,,open,,,,Thanks.  Any chance you could augment the `TargetMethodListSystemTest` class with a few more test cases that would exercise this on each of the default criteria?
+Support target_method functioning for MutationFactory,zzctmac,,,open,,,,"Ok, good idea. Give me some time"
+Support target_method functioning for MutationFactory,zzctmac,,,open,,,,"Hello @jose, I have created tests for checking all default criteria."
+Bump git from 2.4.0 to 4.11.4 in /plugins/jenkins,dependabot[bot],,,closed,2022-12-15T17:37:59Z,,,Superseded by #444.
+Fixed classloader construction for GenericClassImpl,henryhchchc,,,closed,2023-05-07T12:42:38Z,,,Closed due to impatience.
+Fixed classloader construction for GenericClassImpl,henryhchchc,,,closed,2023-05-07T12:42:38Z,,,"Hi @henryhchchc,
 
 Thanks for taking the time to contribute to this project.
 
@@ -214,48 +214,48 @@ I might be able to review this pull request, but I would need a few details/cont
 > ... when there are multiple elements in target class path
 
 Additionally, could you please develop at least one system test that exhibits the issue this pull request fixes?
-",2023-05-09T12:43:38Z
-Fixed classloader construction for GenericClassImpl,henryhchchc,2022-06-17T03:07:57Z,2023-05-07T12:42:38Z,closed,henryhchchc,"The problem is that, when EvoSuite is launched with `-projectCP 'a.jar:b.jar:c.jar'`, the `URLClassLoader` in `GenericClassImpl` is constructed with **a single URL**, i.e., `new URL[] { ""file://a.jar:b.jar:c.jar"" }`, which does not point to any of the JAR files in the class path. In this case, `ClassNotFoundException` will be thrown even the class can be found in these JAR files.
+"
+Fixed classloader construction for GenericClassImpl,henryhchchc,,,closed,2023-05-07T12:42:38Z,,,"The problem is that, when EvoSuite is launched with `-projectCP 'a.jar:b.jar:c.jar'`, the `URLClassLoader` in `GenericClassImpl` is constructed with **a single URL**, i.e., `new URL[] { ""file://a.jar:b.jar:c.jar"" }`, which does not point to any of the JAR files in the class path. In this case, `ClassNotFoundException` will be thrown even the class can be found in these JAR files.
 
 To resolve the classes correctly, in this PR I split the class path with the path separator and construct the `URLClassLoader` with an array of URLs, i.e.,`new URL[]{ ""file://a.jar"", ""file://b.jar"", ""file://c.jar"" }`.
 
-#428 might be due to this bug. The class cannot be found even the dependencies are specified in `-projectCP`.",2023-05-10T07:59:37Z
-Fixed classloader construction for GenericClassImpl,henryhchchc,2022-06-17T03:07:57Z,2023-05-07T12:42:38Z,closed,jose,"Thanks @henryhchchc.  I'm a bit confused though.  How have others (including mysefl) been successfully using EvoSuite with several dependencies in the `-projectCP` argument if, as you said
+#428 might be due to this bug. The class cannot be found even the dependencies are specified in `-projectCP`."
+Fixed classloader construction for GenericClassImpl,henryhchchc,,,closed,2023-05-07T12:42:38Z,,,"Thanks @henryhchchc.  I'm a bit confused though.  How have others (including mysefl) been successfully using EvoSuite with several dependencies in the `-projectCP` argument if, as you said
 
 >  the URLClassLoader in GenericClassImpl is constructed with a single URL, i.e., new URL[] { ""file://a.jar:b.jar:c.jar"" }, which does not point to any of the JAR files in the class path.
-",2023-05-10T09:46:04Z
-Fixed classloader construction for GenericClassImpl,henryhchchc,2022-06-17T03:07:57Z,2023-05-07T12:42:38Z,closed,henryhchchc,Please give me some time to construct an example to demonstrate the issue.,2023-05-10T10:00:13Z
-Bump git from 2.4.0 to 4.11.2 in /plugins/jenkins,dependabot[bot],2022-06-02T15:52:49Z,2022-08-10T18:30:33Z,closed,dependabot[bot],Superseded by #430.,2022-08-10T18:30:32Z
-revive the idea plugin.,XenoAmess,2022-04-05T21:10:55Z,2022-04-09T19:11:42Z,closed,XenoAmess,replaced by https://github.com/EvoSuite/evosuite/pull/414,2022-04-09T19:11:39Z
-Bump xstream from 1.4.17 to 1.4.18,dependabot[bot],2021-08-25T15:26:43Z,2022-02-01T00:57:42Z,closed,dependabot[bot],Superseded by #399.,2022-02-01T00:57:42Z
-Fix a bug in the docker images,mitchellolsthoorn,2021-08-16T21:22:19Z,2021-08-16T21:29:29Z,closed,gofraser,Thanks!,2021-08-16T21:29:23Z
-Fix bug in experiment runner,mitchellolsthoorn,2021-07-02T12:16:26Z,2021-08-16T18:49:53Z,closed,gofraser,Thanks!,2021-08-16T18:49:48Z
-Bump xstream from 1.4.15 to 1.4.17,dependabot[bot],2021-05-18T19:36:00Z,2021-08-25T15:26:45Z,closed,dependabot[bot],Superseded by #377.,2021-08-25T15:26:45Z
-AdaptiveDynaMOSA implementation,giograno,2021-05-13T08:11:51Z,2022-07-22T12:23:21Z,closed,apanichella,"I'll give a look over the weekend (and make some local tests). I'll keep you posted.
+"
+Fixed classloader construction for GenericClassImpl,henryhchchc,,,closed,2023-05-07T12:42:38Z,,,Please give me some time to construct an example to demonstrate the issue.
+Bump git from 2.4.0 to 4.11.2 in /plugins/jenkins,dependabot[bot],,,closed,2022-08-10T18:30:33Z,,,Superseded by #430.
+revive the idea plugin.,XenoAmess,,,closed,2022-04-09T19:11:42Z,,,replaced by https://github.com/EvoSuite/evosuite/pull/414
+Bump xstream from 1.4.17 to 1.4.18,dependabot[bot],,,closed,2022-02-01T00:57:42Z,,,Superseded by #399.
+Fix a bug in the docker images,mitchellolsthoorn,,,closed,2021-08-16T21:29:29Z,,,Thanks!
+Fix bug in experiment runner,mitchellolsthoorn,,,closed,2021-08-16T18:49:53Z,,,Thanks!
+Bump xstream from 1.4.15 to 1.4.17,dependabot[bot],,,closed,2021-08-25T15:26:45Z,,,Superseded by #377.
+AdaptiveDynaMOSA implementation,giograno,,,closed,2022-07-22T12:23:21Z,,,"I'll give a look over the weekend (and make some local tests). I'll keep you posted.
 
-@giograno can you add some test cases?",2021-05-14T07:59:42Z
-AdaptiveDynaMOSA implementation,giograno,2021-05-13T08:11:51Z,2022-07-22T12:23:21Z,closed,giograno,"Thanks @apanichella! 
+@giograno can you add some test cases?"
+AdaptiveDynaMOSA implementation,giograno,,,closed,2022-07-22T12:23:21Z,,,"Thanks @apanichella! 
 
 In the meanwhile, I added a few tests, especially for the sorting of the performance score and the indicators. 
-Let me know if you need something else and/or you have any question.",2021-06-08T13:03:41Z
-AdaptiveDynaMOSA implementation,giograno,2021-05-13T08:11:51Z,2022-07-22T12:23:21Z,closed,apanichella,Great! I am gonna run some experiments to be sure we don't break the latest changes in the main/master branch,2021-06-09T16:15:27Z
-AdaptiveDynaMOSA implementation,giograno,2021-05-13T08:11:51Z,2022-07-22T12:23:21Z,closed,giograno,Hi there! Is there any news about this PR? Is still under consideration? Thanks :) ,2021-08-31T12:49:46Z
-AdaptiveDynaMOSA implementation,giograno,2021-05-13T08:11:51Z,2022-07-22T12:23:21Z,closed,giograno,"Hi there, I stumble across this PR, close to have its first birthday :) @apanichella do you have maybe any update? Many thanks 🙏  ",2022-05-06T15:39:29Z
-AdaptiveDynaMOSA implementation,giograno,2021-05-13T08:11:51Z,2022-07-22T12:23:21Z,closed,giograno,"Hey there. This PR grew quite old and it never seemed to be under consideration. I am going to close it. 
-Please, feel free to re-open it in case you are interested to the contribution. Thank you very much.",2022-07-22T12:23:21Z
-Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,2021-05-03T10:28:41Z,2021-05-04T18:07:22Z,closed,schweikl,"BTW, out of curiosity, you probably noticed there's this method `getGAFromResult(...)` which returns a raw `GeneticAlgorithm` at the moment. Any chances we could refactor this method as well? ",2021-05-03T15:39:57Z
-Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,2021-05-03T10:28:41Z,2021-05-04T18:07:22Z,closed,VoglSebastian,"> BTW, out of curiosity, you probably noticed there's this method `getGAFromResult(...)` which returns a raw `GeneticAlgorithm` at the moment. Any chances we could refactor this method as well?
+Let me know if you need something else and/or you have any question."
+AdaptiveDynaMOSA implementation,giograno,,,closed,2022-07-22T12:23:21Z,,,Great! I am gonna run some experiments to be sure we don't break the latest changes in the main/master branch
+AdaptiveDynaMOSA implementation,giograno,,,closed,2022-07-22T12:23:21Z,,,Hi there! Is there any news about this PR? Is still under consideration? Thanks :) 
+AdaptiveDynaMOSA implementation,giograno,,,closed,2022-07-22T12:23:21Z,,,"Hi there, I stumble across this PR, close to have its first birthday :) @apanichella do you have maybe any update? Many thanks 🙏  "
+AdaptiveDynaMOSA implementation,giograno,,,closed,2022-07-22T12:23:21Z,,,"Hey there. This PR grew quite old and it never seemed to be under consideration. I am going to close it. 
+Please, feel free to re-open it in case you are interested to the contribution. Thank you very much."
+Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,,,closed,2021-05-04T18:07:22Z,,,"BTW, out of curiosity, you probably noticed there's this method `getGAFromResult(...)` which returns a raw `GeneticAlgorithm` at the moment. Any chances we could refactor this method as well? "
+Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,,,closed,2021-05-04T18:07:22Z,,,"> BTW, out of curiosity, you probably noticed there's this method `getGAFromResult(...)` which returns a raw `GeneticAlgorithm` at the moment. Any chances we could refactor this method as well?
 
 getGAFromResult returns a Wildcard type as parameter of GA atm in SystemTestBase, but you probably meant casting it inside that method and returning a GeneticAlgorithm<TestSuiteChromosome>?
 
-I was hesitant to do this, because i wasn't sure if there are any tests that may rely on a GeneticAlgorithm<TestChromosome>?",2021-05-03T17:09:07Z
-Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,2021-05-03T10:28:41Z,2021-05-04T18:07:22Z,closed,VoglSebastian,"I have made some changes regarding the Method getGAFromResults.
-f42ccd1 is the commit that makes the changes, the later one only updates the call sites.",2021-05-04T11:44:07Z
-Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,2021-05-03T10:28:41Z,2021-05-04T18:07:22Z,closed,schweikl,"> getGAFromResult returns a Wildcard type as parameter of GA atm in SystemTestBase, but you probably meant casting it inside that method and returning a GeneticAlgorithm?
+I was hesitant to do this, because i wasn't sure if there are any tests that may rely on a GeneticAlgorithm<TestChromosome>?"
+Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,,,closed,2021-05-04T18:07:22Z,,,"I have made some changes regarding the Method getGAFromResults.
+f42ccd1 is the commit that makes the changes, the later one only updates the call sites."
+Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,,,closed,2021-05-04T18:07:22Z,,,"> getGAFromResult returns a Wildcard type as parameter of GA atm in SystemTestBase, but you probably meant casting it inside that method and returning a GeneticAlgorithm?
 > 
 > I was hesitant to do this, because i wasn't sure if there are any tests that may rely on a GeneticAlgorithm?
 
 Oh, yes, you are right of course, it currently returns a `GeneticAlgorithm<?>` but it would be nice to have a `GeneticAlgorithm<T>` instead. Sorry for the confusion.
-",2021-05-04T13:49:35Z
-Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,2021-05-03T10:28:41Z,2021-05-04T18:07:22Z,closed,schweikl,"Some of the tests on CircleCI fail, but AFAIK they have been failing way before your MR. So I would be fine with that and happy to merge your changes.",2021-05-04T15:59:42Z
-Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,2021-05-03T10:28:41Z,2021-05-04T18:07:22Z,closed,gofraser,"Looks great, thanks!",2021-05-04T18:07:15Z
+"
+Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,,,closed,2021-05-04T18:07:22Z,,,"Some of the tests on CircleCI fail, but AFAIK they have been failing way before your MR. So I would be fine with that and happy to merge your changes."
+Removing some raw usages of generic types introduced by our previous selftype refactoring.,VoglSebastian,,,closed,2021-05-04T18:07:22Z,,,"Looks great, thanks!"
