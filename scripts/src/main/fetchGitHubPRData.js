@@ -4,13 +4,12 @@ const moment = require('moment');
 const { createObjectCsvWriter } = require('csv-writer');
 
 // Load configuration from JSON
-<<<<<<< HEAD
 const config = require('./github_config.json'); // Assuming your JSON config is in config.json file
 
 // Function to fetch pull requests created by a specific author after a certain date
 async function getPullRequests(author, fromDate, projectConfig) {
     const url = `https://api.github.com/repos/${projectConfig.owner}/${projectConfig.repo}/pulls`;
-=======
+
 const config = require('./config.json'); // Assuming your JSON config is in config.json file
 
 // Function to fetch pull requests created by a specific author after a certain date
@@ -18,7 +17,7 @@ async function getPullRequests(author, fromDate, projectConfig) {
     const url = config.github.baseURL+(config.github.pr_apiURLs).
                     replace('$owner', projectConfig.owner).
                     replace('$repo', projectConfig.repo);
->>>>>>> main
+
     try {
         const response = await axios.get(url, {
             params: {
