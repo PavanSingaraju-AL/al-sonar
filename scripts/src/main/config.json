@@ -1,12 +1,12 @@
 {
     "gitlab": {
         "baseURL": "https://gitlab.com/api/v4/projects/",
-        "pr_apiURLs": "/merge_requests?author_name=$author_name&created_after=$created_after_date",
+        "pr_apiURLs": "/merge_requests?author_username=$author_name&created_after=$created_after_date",
         "comment_apiURL":"/notes",
         "projects": [
             {
                 "project_id": "54710891",
-                "token": "<Confidential>", 
+                "token": "glpat-ZGByfV9k_dexPonfJcMW", 
                 "author_usernames": [
                     "pavan.singaraju"
                 ],
