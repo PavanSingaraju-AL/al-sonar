@@ -56,19 +56,13 @@ async function fetchMergeRequestsAndComments() {
                 
                 for (const mr of mergeRequests) {
                     const commits = await getMergeRequestComments(projectConfig.project_id, mr.iid, projectConfig);
-                    const prData = {
-                        pr_title: mr.title,
-                        pr_author: mr.author.name,
-                        pr_created_at: mr.created_at,
-                        pr_status: mr.state,
-                        pr_closed_on: mr.merged_at
-                    };
                     const commentsData = commits.map(commit => ({
                         pr_title: mr.title,
                         pr_author: mr.author.name,
                         pr_priority: '',
                         pr_size: '',
                         pr_status: mr.state,
+                        pr_created_at: mr.created_at,
                         pr_closed_on: mr.merged_at,
                         pr_no_of_days: calculateDaysSinceClosed(mr.merged_at, mr.created_at),
                         pr_returned: '',
@@ -94,6 +88,7 @@ async function fetchMergeRequestsAndComments() {
             { id: 'pr_priority', title: 'PR Priority'},
             { id: 'pr_size', title: 'Story Points'},
             { id: 'pr_status', title: 'PR Status' },
+            { id: 'pr_created_at', title: 'PR Created On' },
             { id: 'pr_closed_on', title: 'PR Closed On' },
             { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
             { id: 'pr_returned', title: 'Is PR Returned?' },

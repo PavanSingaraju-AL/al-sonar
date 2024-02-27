@@ -30,6 +30,7 @@ async function getPullRequests(author, fromDate, projectConfig) {
 }
 
 function calculateDaysSinceClosed(closedAt, createdAt) {
+    console.log("ClosedAT:: "+closedAt);
     if (!closedAt) {
       return ''; // Indicate "not applicable" for open PRs
     }
@@ -38,6 +39,7 @@ function calculateDaysSinceClosed(closedAt, createdAt) {
     const createdDate = new Date(createdAt);
     const timeDiff = closedDate.getTime() - createdDate.getTime();
     const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    console.log("days:: "+days);
     return days;
 }
 
@@ -65,25 +67,27 @@ async function fetchPullRequestsAndComments() {
         for (const author of projectConfig.author_usernames) {
             try {
                 const pullRequests = await getPullRequests(author, fromDate, projectConfig);
-                for (const pr of pullRequests) {
+                // const filteredPulls = pullRequests.filter(pr => pr.user.login === author);
+                // Filter pull requests by author and date
+                const filteredPulls = pullRequests.filter(pr =>
+                    projectConfig.author_usernames.includes(pr.user.login) &&
+                    moment(pr.created_at).isSameOrAfter(projectConfig.created_after)
+                );
+
+                for (const pr of filteredPulls) {
                     const comments = await getPullRequestComments(pr, projectConfig);
-                    const prData = {
-                        pr_title: pr.title,
-                        pr_author: pr.user.login,
-                        pr_created_at: pr.created_at,
-                        pr_status: pr.state,
-                        pr_closed_on: pr.closed_at
-                    };
                     const commentsData = comments.map(comment => ({
                         pr_title: pr.title,
                         pr_author: pr.user.login,
                         pr_priority: '',
                         pr_size: '',
                         pr_status: pr.state,
+                        pr_created_at: pr.created_at,
                         pr_closed_on: pr.closed_at,
                         pr_no_of_days: calculateDaysSinceClosed(pr.closedAt, pr.createdAt),
                         pr_returned: '',
-                        comment_body: comment.body
+                        comment_body: comment.body, 
+                        pr_URL: pr.html_url
                     }));
                     // Combine PR and comment data
                     prsAndComments.push(commentsData);
@@ -93,7 +97,7 @@ async function fetchPullRequestsAndComments() {
             }
         }
     }
-    console.log(prsAndComments);
+    //console.log(prsAndComments);
 
     // Write data to CSV
     const csvWriter = createObjectCsvWriter({
@@ -104,10 +108,12 @@ async function fetchPullRequestsAndComments() {
             { id: 'pr_priority', title: 'PR Priority'},
             { id: 'pr_size', title: 'Story Points'},
             { id: 'pr_status', title: 'PR Status' },
+            { id: 'pr_created_at', title: 'PR Created On' },
             { id: 'pr_closed_on', title: 'PR Closed On' },
             { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
             { id: 'pr_returned', title: 'Is PR Returned?' },
-            { id: 'comment_body', title: 'Comment Body' }
+            { id: 'comment_body', title: 'Comment Body' },
+            { id: 'pr_URL', title: 'PR URL' }
         ]
     });
 
