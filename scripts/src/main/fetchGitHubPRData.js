@@ -4,12 +4,6 @@ const moment = require('moment');
 const { createObjectCsvWriter } = require('csv-writer');
 
 // Load configuration from JSON
-const config = require('./github_config.json'); // Assuming your JSON config is in config.json file
-
-// Function to fetch pull requests created by a specific author after a certain date
-async function getPullRequests(author, fromDate, projectConfig) {
-    const url = `https://api.github.com/repos/${projectConfig.owner}/${projectConfig.repo}/pulls`;
-
 const config = require('./config.json'); // Assuming your JSON config is in config.json file
 
 // Function to fetch pull requests created by a specific author after a certain date
@@ -17,7 +11,6 @@ async function getPullRequests(author, fromDate, projectConfig) {
     const url = config.github.baseURL+(config.github.pr_apiURLs).
                     replace('$owner', projectConfig.owner).
                     replace('$repo', projectConfig.repo);
-
     try {
         const response = await axios.get(url, {
             params: {
@@ -72,25 +65,27 @@ async function fetchPullRequestsAndComments() {
         for (const author of projectConfig.author_usernames) {
             try {
                 const pullRequests = await getPullRequests(author, fromDate, projectConfig);
-                for (const pr of pullRequests) {
+                // const filteredPulls = pullRequests.filter(pr => pr.user.login === author);
+                // Filter pull requests by author and date
+                const filteredPulls = pullRequests.filter(pr =>
+                    projectConfig.author_usernames.includes(pr.user.login) &&
+                    moment(pr.created_at).isSameOrAfter(projectConfig.created_after)
+                );
+
+                for (const pr of filteredPulls) {
                     const comments = await getPullRequestComments(pr, projectConfig);
-                    const prData = {
-                        pr_title: pr.title,
-                        pr_author: pr.user.login,
-                        pr_created_at: pr.created_at,
-                        pr_status: pr.state,
-                        pr_closed_on: pr.closed_at
-                    };
                     const commentsData = comments.map(comment => ({
                         pr_title: pr.title,
                         pr_author: pr.user.login,
                         pr_priority: '',
                         pr_size: '',
                         pr_status: pr.state,
+                        pr_created_at: pr.created_at,
                         pr_closed_on: pr.closed_at,
                         pr_no_of_days: calculateDaysSinceClosed(pr.closedAt, pr.createdAt),
                         pr_returned: '',
-                        comment_body: comment.body
+                        comment_body: comment.body, 
+                        pr_URL: pr.html_url
                     }));
                     // Combine PR and comment data
                     prsAndComments.push(commentsData);
@@ -111,10 +106,12 @@ async function fetchPullRequestsAndComments() {
             { id: 'pr_priority', title: 'PR Priority'},
             { id: 'pr_size', title: 'Story Points'},
             { id: 'pr_status', title: 'PR Status' },
+            { id: 'pr_created_at', title: 'PR Created On' },
             { id: 'pr_closed_on', title: 'PR Closed On' },
             { id: 'pr_no_of_days', title: 'No. Of Days to Close the PR' },
             { id: 'pr_returned', title: 'Is PR Returned?' },
-            { id: 'comment_body', title: 'Comment Body' }
+            { id: 'comment_body', title: 'Comment Body' },
+            { id: 'pr_URL', title: 'PR URL' }
         ]
     });
 
