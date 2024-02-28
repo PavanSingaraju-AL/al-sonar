@@ -61,15 +61,16 @@ async function getPullRequestComments(pullRequest, projectConfig) {
 async function fetchPullRequestsAndComments() {
     const prsAndComments = [];
     for (const projectConfig of config.github.projects) {
-        const fromDate = moment(projectConfig.created_after).toISOString();
+        const fromDate = moment(projectConfig.created_from).toISOString();
+        const toDate = moment(projectConfig.created_upto).toISOString();
         for (const author of projectConfig.author_usernames) {
             try {
                 const pullRequests = await getPullRequests(author, fromDate, projectConfig);
-                // const filteredPulls = pullRequests.filter(pr => pr.user.login === author);
-                // Filter pull requests by author and date
+                // Filter pull requests by author and created date between configured dates.
                 const filteredPulls = pullRequests.filter(pr =>
-                    projectConfig.author_usernames.includes(pr.user.login) &&
-                    moment(pr.created_at).isSameOrAfter(projectConfig.created_after)
+                    author == pr.user.login &&
+                    (moment(pr.createdAt).isSameOrAfter(fromDate) ||
+                    moment(pr.createdAt).isSameOrBefore(toDate))
                 );
 
                 for (const pr of filteredPulls) {
@@ -95,7 +96,7 @@ async function fetchPullRequestsAndComments() {
             }
         }
     }
-    console.log(prsAndComments);
+    // console.log(prsAndComments);
 
     // Write data to CSV
     const csvWriter = createObjectCsvWriter({
