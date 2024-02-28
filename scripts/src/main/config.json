@@ -6,11 +6,12 @@
         "projects": [
             {
                 "project_id": "54710891",
-                "token": "glpat-ZGByfV9k_dexPonfJcMW", 
+                "token": "<Confidential>", 
                 "author_usernames": [
                     "pavan.singaraju"
                 ],
-                "created_after": "2024-02-08"
+                "created_from": "2024-02-08",
+                "created_upto": "2024-02-15"
             }
         ]
     },
@@ -21,11 +22,13 @@
           {
             "owner": "EvoSuite",
             "repo": "evosuite",
-            "token": "<Confidential>",
-            "created_after": "2023-09-01T00:00:00Z",
+            "token": "<Confidential>",            
             "author_usernames": [
-                "tanjh"
-            ]
+                "tanjh", 
+                "runboo-fly"
+            ],
+            "created_from": "2024-01-14",
+            "created_upto": "2024-02-29"
           }
         ]
       }

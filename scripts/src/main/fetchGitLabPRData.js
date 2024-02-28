@@ -49,12 +49,16 @@ async function getMergeRequestComments(projectId, mergeRequestId, projectConfig)
 async function fetchMergeRequestsAndComments() {
     const prsAndCommits = [];
     for (const projectConfig of config.gitlab.projects) {
-        const fromDate = moment(projectConfig.created_after).toISOString();
+        const fromDate = moment(projectConfig.created_from).toISOString();
+        const toDate = moment(projectConfig.created_upto).toISOString();
         for (const author of projectConfig.author_usernames) {
             try {
                 const mergeRequests = await getMergeRequests(author, fromDate, projectConfig);
+                const filteredMRs = mergeRequests.filter(mr => 
+                    moment(mr.created_at).isSameOrBefore(toDate)
+                );
                 
-                for (const mr of mergeRequests) {
+                for (const mr of filteredMRs) {
                     const commits = await getMergeRequestComments(projectConfig.project_id, mr.iid, projectConfig);
                     const commentsData = commits.map(commit => ({
                         pr_title: mr.title,
