@@ -31,6 +31,24 @@
             "created_upto": "2024-02-29"
           }
         ]
+      },
+      "bitbucket": {
+        "baseURL": "https://api.bitbucket.org/2.0/",
+        "pr_apiURLs": "pullrequests/",
+        "pr_commentsURL":"repositories/$workspace/$repo_slug/pullrequests/$pull_request_id/comments",
+        "projects": [
+          {
+            "workspace": "datixltd",
+            "repo_slug": "datixweb",
+            "access_userid": "ersmindia",
+            "token": "<Confidential>",            
+            "author_usernames": [
+                "ersmindia"
+            ],
+            "created_from": "2024-01-14",
+            "created_upto": "2024-02-29"
+          }
+        ]
       }
     
 }

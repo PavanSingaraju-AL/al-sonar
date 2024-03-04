@@ -14,9 +14,7 @@ async function getPullRequests(author, fromDate, projectConfig) {
     try {
         const response = await axios.get(url, {
             params: {
-                state: 'all', // Include closed pull requests as well
-                creator: author,
-                since: fromDate
+                state: 'all'
             },
             headers: {
                 'Authorization': `token ${projectConfig.token}`
@@ -38,13 +36,12 @@ function calculateDaysSinceClosed(closedAt, createdAt) {
     const createdDate = new Date(createdAt);
     const timeDiff = closedDate.getTime() - createdDate.getTime();
     const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    console.log("days:: "+days);
     return days;
 }
 
 // Function to fetch comments for a pull request
 async function getPullRequestComments(pullRequest, projectConfig) {
-    const url = pullRequest.comments_url;
+    const url = pullRequest.review_comments_url;
     try {
         const response = await axios.get(url, {
             headers: {
@@ -97,7 +94,7 @@ async function fetchPullRequestsAndComments() {
             }
         }
     }
-    // console.log(prsAndComments);
+    console.log(prsAndComments);
 
     // Write data to CSV
     const csvWriter = createObjectCsvWriter({
