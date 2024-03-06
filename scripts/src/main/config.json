@@ -20,15 +20,19 @@
         "pr_apiURLs": "repos/$owner/$repo/pulls",
         "projects": [
           {
-            "owner": "EvoSuite",
-            "repo": "evosuite",
+            "owner": "RK-BCR",
+            "repo": "BCR-Web",
             "token": "<Confidential>",            
             "author_usernames": [
-                "tanjh", 
-                "runboo-fly"
+              "mohangurjar82",
+              "shhhRakesh",
+              "Ajay-Kilaka",
+              "suganyarajendran-accion",
+              "durgachamada",
+              "resh3290"
             ],
             "created_from": "2024-01-14",
-            "created_upto": "2024-02-29"
+            "created_upto": "2024-03-06"
           }
         ]
       },

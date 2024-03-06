@@ -11,6 +11,7 @@ async function getPullRequests(author, fromDate, projectConfig) {
     const url = config.github.baseURL+(config.github.pr_apiURLs).
                     replace('$owner', projectConfig.owner).
                     replace('$repo', projectConfig.repo);
+    
     try {
         const response = await axios.get(url, {
             params: {
@@ -41,9 +42,12 @@ function calculateDaysSinceClosed(closedAt, createdAt) {
 
 // Function to fetch comments for a pull request
 async function getPullRequestComments(pullRequest, projectConfig) {
-    const url = pullRequest.review_comments_url;
+
+    const url = config.github.baseURL+(config.github.pr_apiURLs)+'/'+pullRequest.number+'/comments';
+    const prURL = url.replace('$owner', projectConfig.owner)
+                    .replace('$repo', projectConfig.repo);
     try {
-        const response = await axios.get(url, {
+        const response = await axios.get(prURL, {
             headers: {
                 'Authorization': `token ${projectConfig.token}`
             }
@@ -65,6 +69,7 @@ async function fetchPullRequestsAndComments() {
             try {
                 const pullRequests = await getPullRequests(author, fromDate, projectConfig);
                 // Filter pull requests by author and created date between configured dates.
+                // console.log(pullRequests);
                 const filteredPulls = pullRequests.filter(pr =>
                     author == pr.user.login &&
                     (moment(pr.createdAt).isSameOrAfter(fromDate) ||
@@ -83,6 +88,7 @@ async function fetchPullRequestsAndComments() {
                         pr_closed_on: pr.closed_at,
                         pr_no_of_days: calculateDaysSinceClosed(pr.closedAt, pr.createdAt),
                         pr_returned: '',
+                        pr_description: comments.body,
                         comment_body: comment.body, 
                         pr_URL: pr.html_url
                     }));
